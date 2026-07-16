@@ -9,6 +9,9 @@
 **Problem summary:**
 `StructuralChunker.chunk()` in `ingestion/chunking/structural_chunker.py` splits documents by markdown headings, but returns an empty list when a document has none. Instead of falling back to treating the whole document as a single chunk, it silently drops it — meaning plain-text documents never make it into the RAG index. The fix is to add a fallback so headingless documents are returned as one chunk rather than zero. There's already a failing test for this case: `test_document_with_no_headings` in `tests/unit/test_structural_chunker.py`.
 
+**Selection notes:**
+This is a Tier 1 issue. I chose it because the fix is scoped to a single method in one file, and there's already a failing test pointing directly at the problem — so I can verify my fix without having to write the test from scratch. As someone still getting comfortable with a large codebase, having a clear entry point and a concrete expected behavior made this a good fit.
+
 **Branch name:** feat/149-structural-chunker-fallback
 
 **Setup confirmation:** [x] App runs locally at localhost:5173
