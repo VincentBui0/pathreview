@@ -22,12 +22,12 @@ This is a Tier 1 issue. I chose it because the fix is scoped to a single method 
 
 ## Week 8 — Reproduction & solution planning
 
-**Reproduction commit link:** [link to your reproduction commit]
+**Reproduction commit link:** [[commit 9d56d62](https://github.com/VincentBui0/pathreview/commit/9d56d624a5006a942662f13ab05955ec5f8a0971)]
 
 **Reproduction summary:**
 Ran `StructuralChunker().chunk()` against a ~1000-character plain text string with no markdown headings and observed a return value of `[]`. The pre-existing test `test_document_with_no_headings` in `tests/unit/test_structural_chunker.py` also fails as expected.
 
-**PLAN.md link:** [link to PLAN.md in your fork]
+**PLAN.md link:** [[PLAN.md](https://github.com/VincentBui0/pathreview/blob/feat/149-structural-chunker-fallback/PLAN.md)]
 
 **Walkthrough video (recommended):** N/A
 
