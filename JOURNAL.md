@@ -17,3 +17,19 @@ This is a Tier 1 issue. I chose it because the fix is scoped to a single method 
 **Setup confirmation:** [x] App runs locally at localhost:5173
 
 **Cohort ledger:** [x] Issue added to cohort ledger
+
+---
+
+## Week 8 — Reproduction & solution planning
+
+**Reproduction commit link:** [link to your reproduction commit]
+
+**Reproduction summary:**
+Ran `StructuralChunker().chunk()` against a ~1000-character plain text string with no markdown headings and observed a return value of `[]`. The pre-existing test `test_document_with_no_headings` in `tests/unit/test_structural_chunker.py` also fails as expected.
+
+**PLAN.md link:** [link to PLAN.md in your fork]
+
+**Walkthrough video (recommended):** N/A
+
+**Blockers or open questions:**
+Need to confirm whether content appearing before the first heading in a mixed document is currently also silently dropped, and whether the fix should surface that as a separate chunk or leave it out of scope.
