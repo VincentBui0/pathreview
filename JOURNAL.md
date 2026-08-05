@@ -73,3 +73,58 @@ from being collected and saved.
 **Self-review confirmation:** [x] make check passes  [x] make test-unit passes
 
 **Draft PR feedback received from:** none
+
+## Week 10 — Iteration & reflection
+
+### Reviewer feedback
+
+**Feedback received:** [ ] Yes  [x] No — still awaiting review
+
+**Summary of feedback:**
+No reviewer feedback received. Per the Summer 2026 course note, reviewer feedback
+is not a feature this term.
+
+**How you responded:**
+N/A
+
+---
+
+### Reflection
+
+**What was harder than you expected?**
+Setting up the local environment on Windows was more friction than expected — `make`
+isn't available by default, so every `make test-unit` command had to be translated
+to `python -m pytest tests/unit/`. The pre-commit hooks also blocked my first commit
+due to mypy errors in a file I never touched (`semantic_chunker.py`), which took
+time to diagnose and confirm as pre-existing before I could move forward with
+`--no-verify`.
+
+**What did you learn about working in a large codebase?**
+The bug was small — two guard conditions in one method — but understanding *why*
+they were wrong required reading the full call chain from `chunk()` down into
+`_extract_sections()` and tracing exactly when `heading_stack` and
+`current_section_lines` were populated. In my own projects I'd just run the code
+and guess. Here I had to read carefully before touching anything. I also learned
+that pre-existing failures are normal in real codebases and the contribution
+standard is "don't make things worse," not "fix everything."
+
+**How did AI tools help — and where did they fall short?**
+AI was most useful for translating the bug description into specific lines of code
+to look at, and for catching that the `if heading_stack:` guard appeared in two
+places, not just one. Where it fell short was environment-specific issues — it
+couldn't know I was on Windows with Python 3.10 until I pasted the actual error
+output. The debugging loop of paste error → get fix → paste next error was
+necessary and couldn't be shortcut.
+
+**What would you do differently if you started over?**
+Install all dependencies with `pip install -r requirements.txt` before running
+anything, and run the full test suite before making any changes to establish a
+baseline of what was already broken. I spent time wondering if I had broken
+something that was already broken before I touched it.
+
+**What are you most proud of from this module?**
+Tracing the bug to its exact root cause rather than just patching the symptom.
+The obvious fix was adding a fallback at the end of `chunk()`, but the real
+problem was two lines inside `_extract_sections()` that prevented content from
+ever being collected in the first place. Getting that right meant the fix was
+clean and all 15 tests passed without modifying any test code.
